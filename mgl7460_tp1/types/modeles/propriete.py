@@ -1,4 +1,4 @@
-from mgl7460.tp1.types.modeles.adresse import Adresse
+from mgl7460_tp1.types.modeles.adresse import Adresse
 
 
 class Propriete:

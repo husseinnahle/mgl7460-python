@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from mgl7460.tp1.types.modeles.demandeur_pret import DemandeurPret
-from mgl7460.tp1.types.modeles.propriete import Propriete
-from mgl7460.tp1.types.modeles.resultat_traitement import ResultatTraitement
-from mgl7460.tp1.types.modeles.termes_pret import TermesPret
+from mgl7460_tp1.types.modeles.demandeur_pret import DemandeurPret
+from mgl7460_tp1.types.modeles.propriete import Propriete
+from mgl7460_tp1.types.modeles.resultat_traitement import ResultatTraitement
+from mgl7460_tp1.types.modeles.termes_pret import TermesPret
 
 
 class DemandePret:

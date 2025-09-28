@@ -1,10 +1,10 @@
 from datetime import datetime
 from logging import Logger
 
-from mgl7460.tp1.types.modeles.demande_pret import DemandePret
-from mgl7460.tp1.types.traitements.definitions.definition_processus import DefinitionProcessus
-from mgl7460.tp1.types.traitements.instances.etat_processus import EtatProcessus
-from mgl7460.tp1.types.traitements.instances.instance_tache import InstanceTache
+from mgl7460_tp1.types.modeles.demande_pret import DemandePret
+from mgl7460_tp1.types.traitements.definitions.definition_processus import DefinitionProcessus
+from mgl7460_tp1.types.traitements.instances.etat_processus import EtatProcessus
+from mgl7460_tp1.types.traitements.instances.instance_tache import InstanceTache
 
 
 class InstanceProcessus:

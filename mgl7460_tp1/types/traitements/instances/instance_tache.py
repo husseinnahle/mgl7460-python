@@ -1,7 +1,7 @@
-from mgl7460.tp1.types.modeles.demande_pret import DemandePret
-from mgl7460.tp1.types.traitements.definitions.definition_tache import DefinitionTache
-from mgl7460.tp1.types.traitements.instances.etat_traitement import EtatTraitement
-from mgl7460.tp1.types.traitements.instances.instance_processus import InstanceProcessus
+from mgl7460_tp1.types.modeles.demande_pret import DemandePret
+from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
+from mgl7460_tp1.types.traitements.instances.etat_traitement import EtatTraitement
+from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceProcessus
 
 
 class InstanceTache:

@@ -1,6 +1,6 @@
 from logging import Logger
 
-from mgl7460.tp1.types.modeles.demande_pret import DemandePret
+from mgl7460_tp1.types.modeles.demande_pret import DemandePret
 
 
 class TraitementTache:

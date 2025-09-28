@@ -1,4 +1,4 @@
-from mgl7460.tp1.types.modeles.resultat import Resultat
+from mgl7460_tp1.types.modeles.resultat import Resultat
 
 
 class ResultatTraitement:

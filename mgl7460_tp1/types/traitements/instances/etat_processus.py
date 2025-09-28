@@ -1,5 +1,5 @@
-from mgl7460.tp1.types.traitements.instances.etat_traitement import EtatTraitement
-from mgl7460.tp1.types.traitements.instances.instance_tache import InstanceTache
+from mgl7460_tp1.types.traitements.instances.etat_traitement import EtatTraitement
+from mgl7460_tp1.types.traitements.instances.instance_tache import InstanceTache
 
 
 class EtatProcessus:

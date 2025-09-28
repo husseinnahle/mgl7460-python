@@ -1,16 +1,16 @@
-from mgl7460.tp1.types.modeles.adresse import Adresse
-from mgl7460.tp1.types.modeles.demande_pret import DemandePret
-from mgl7460.tp1.types.modeles.demandeur_pret import DemandeurPret
-from mgl7460.tp1.types.modeles.propriete import Propriete
-from mgl7460.tp1.types.modeles.resultat import Resultat
-from mgl7460.tp1.types.modeles.resultat_traitement import ResultatTraitement
-from mgl7460.tp1.types.traitements.definitions.condition_transition import ConditionTransition
-from mgl7460.tp1.types.traitements.definitions.definition_processus import DefinitionProcessus
-from mgl7460.tp1.types.traitements.definitions.definition_tache import DefinitionTache
-from mgl7460.tp1.types.traitements.definitions.definition_transition import DefinitionTransition
-from mgl7460.tp1.types.traitements.definitions.traitement_tache import TraitementTache
-from mgl7460.tp1.types.traitements.instances.instance_processus import InstanceProcessus
-from mgl7460.tp1.types.traitements.instances.instance_tache import InstanceTache
+from mgl7460_tp1.types.modeles.adresse import Adresse
+from mgl7460_tp1.types.modeles.demande_pret import DemandePret
+from mgl7460_tp1.types.modeles.demandeur_pret import DemandeurPret
+from mgl7460_tp1.types.modeles.propriete import Propriete
+from mgl7460_tp1.types.modeles.resultat import Resultat
+from mgl7460_tp1.types.modeles.resultat_traitement import ResultatTraitement
+from mgl7460_tp1.types.traitements.definitions.condition_transition import ConditionTransition
+from mgl7460_tp1.types.traitements.definitions.definition_processus import DefinitionProcessus
+from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
+from mgl7460_tp1.types.traitements.definitions.definition_transition import DefinitionTransition
+from mgl7460_tp1.types.traitements.definitions.traitement_tache import TraitementTache
+from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceProcessus
+from mgl7460_tp1.types.traitements.instances.instance_tache import InstanceTache
 
 
 class Fabrique:

@@ -1,6 +1,6 @@
-from mgl7460.tp1.types.traitements.definitions.condition_transition import ConditionTransition
-from mgl7460.tp1.types.traitements.definitions.definition_tache import DefinitionTache
-from mgl7460.tp1.types.traitements.definitions.definition_transition import DefinitionTransition
+from mgl7460_tp1.types.traitements.definitions.condition_transition import ConditionTransition
+from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
+from mgl7460_tp1.types.traitements.definitions.definition_transition import DefinitionTransition
 
 
 class DefinitionProcessus:

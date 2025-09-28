@@ -1,4 +1,4 @@
-from mgl7460.tp1.types.traitements.definitions.traitement_tache import TraitementTache
+from mgl7460_tp1.types.traitements.definitions.traitement_tache import TraitementTache
 
 
 class DefinitionTache:
