@@ -9,15 +9,13 @@ class InstanceTacheImpl(InstanceTache):
 
     def __init__(
         self,
-        demande_pret: DemandePret,
         definition_tache: DefinitionTache,
         processus_englobant: InstanceProcessus,
-        etat_instance_tache: EtatTraitement,
     ) -> None:
-        self.demande_pret = demande_pret
         self.definition_tache = definition_tache
         self.processus_englobant = processus_englobant
-        self.etat_instance_tache = etat_instance_tache
+        self.demande_pret: DemandePret | None = None
+        self.etat_instance_tache: EtatTraitement | None = None
 
     def get_definition_tache(self) -> DefinitionTache:
         return self.definition_tache

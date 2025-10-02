@@ -1,7 +1,7 @@
 from mgl7460_tp1.types.modeles.demande_pret import DemandePret
 from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
 from mgl7460_tp1.types.traitements.instances.etat_traitement import EtatTraitement
-from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceProcessus
+# from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceProcessus # circular import
 
 
 class InstanceTache:
@@ -12,7 +12,7 @@ class InstanceTache:
 
     def set_etat_instance_tache(self, etat_traitement: EtatTraitement) -> None: ...
 
-    def get_processus_englobant(self) -> InstanceProcessus: ...
+    def get_processus_englobant(self): ...
 
     def get_demande_pret(self) -> DemandePret: ...
 

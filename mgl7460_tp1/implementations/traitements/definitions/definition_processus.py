@@ -10,16 +10,13 @@ class DefinitionProcessusImpl(DefinitionProcessus):
     def __init__(
         self,
         nom: str,
-        description: str,
-        premiere_tache: DefinitionTache,
-        taches: list[DefinitionTache],
-        transitions: list[DefinitionTransition],
+        description: str
     ) -> None:
         self.nom = nom
         self.description = description
-        self.premiere_tache = premiere_tache
-        self.taches = taches
-        self.transitions = transitions
+        self.premiere_tache: DefinitionTache | None = None
+        self.taches: list[DefinitionTache] = []
+        self.transitions: list[DefinitionTransition] = []
 
     def get_nom(self) -> str:
         return self.nom

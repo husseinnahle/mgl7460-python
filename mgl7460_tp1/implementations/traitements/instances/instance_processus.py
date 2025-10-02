@@ -12,7 +12,7 @@ from mgl7460_tp1.types.traitements.utils.fabrique import Fabrique
 
 class InstanceProcessusImpl(InstanceProcessus):
 
-    def __init__(self, definition_processus: DefinitionProcessus, demande_pret: DemandePret, logger: Logger) -> None:
+    def __init__(self, definition_processus: DefinitionProcessus, demande_pret: DemandePret) -> None:
         self.definition_processus = definition_processus
         self.demande_pret = demande_pret
         self.tache_courante: InstanceTache | None = None
@@ -20,7 +20,7 @@ class InstanceProcessusImpl(InstanceProcessus):
         self.temps_demarrage: datetime | None = None
         self.temps_arret: datetime | None = None
         self.etat_processus: EtatProcessus | None = None
-        self.logger = logger
+        self.logger: Logger | None = None
 
     def get_demande_pret(self) -> DemandePret:
         return self.demande_pret
@@ -48,6 +48,9 @@ class InstanceProcessusImpl(InstanceProcessus):
 
     def get_logger(self) -> Logger:
         return self.logger
+
+    def set_logger(self, logger: Logger) -> None:
+        self.logger = logger
 
     def demarrer(self) -> None:
 
