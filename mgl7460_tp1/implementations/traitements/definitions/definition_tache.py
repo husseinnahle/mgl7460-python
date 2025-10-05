@@ -4,7 +4,7 @@ from mgl7460_tp1.types.traitements.definitions.traitement_tache import Traitemen
 
 class DefinitionTacheImpl(DefinitionTache):
 
-    def __init__(self, nom: str, description: str, traitement: TraitementTache):
+    def __init__(self, nom: str, description: str, traitement: TraitementTache | None = None) -> None:
         self._nom = nom
         self._description = description
         self._traitement = traitement

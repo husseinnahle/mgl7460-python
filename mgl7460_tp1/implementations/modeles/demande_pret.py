@@ -10,20 +10,19 @@ class DemandePretImpl(DemandePret):
 
     def __init__(
         self,
-        numero_demande: str,
-        date_demande: datetime,
+        propriete: Propriete,    
         demandeur_pret: DemandeurPret,
-        propriete: Propriete,
-        montant_mise_de_fonds: float,
         prix_achat: float,
-        termes_pret: TermesPret,
-        resultat_traitement: ResultatTraitement,
+        mise_de_fonds: float,
+        numero_demande: str | None = None,
+        termes_pret: TermesPret | None = None,
+        resultat_traitement: ResultatTraitement | None = None,
     ) -> None:
         self.numero_demande = numero_demande
-        self.date_demande = date_demande
+        self.date_demande = datetime.now()
         self.demandeur_pret = demandeur_pret
         self.propriete = propriete
-        self.montant_mise_de_fonds = montant_mise_de_fonds
+        self.mise_de_fonds = mise_de_fonds
         self.prix_achat = prix_achat
         self.termes_pret = termes_pret
         self.resultat_traitement = resultat_traitement
@@ -41,13 +40,13 @@ class DemandePretImpl(DemandePret):
         return self.propriete
 
     def get_montant_pret(self) -> float:
-        return self.prix_achat - self.montant_mise_de_fonds
+        return self.prix_achat - self.mise_de_fonds
 
-    def get_montant_mise_de_fonds(self) -> float:
-        return self.montant_mise_de_fonds
+    def get_mise_de_fonds(self) -> float:
+        return self.mise_de_fonds
 
-    def set_montant_mise_de_fonds(self, montant: float) -> None:
-        self.montant_mise_de_fonds = montant
+    def set_mise_de_fonds(self, montant: float) -> None:
+        self.mise_de_fonds = montant
 
     def get_resultat_traitement(self) -> ResultatTraitement:
         return self.resultat_traitement
@@ -64,7 +63,7 @@ class DemandePretImpl(DemandePret):
     def set_prix_achat(self, prix: float) -> None:
         self.prix_achat = prix
 
-    def get_termes_pret(self) -> TermesPret:
+    def get_termes_pret(self) -> TermesPret | None:
         return self.termes_pret
 
     def set_termes_pret(self, termes: TermesPret) -> None:

@@ -1,3 +1,6 @@
+from mgl7460_tp1.types.modeles.province_ou_territoire import ProvinceOuTerritoire
+
+
 class Adresse:
     def __init__(
         self,
@@ -5,7 +8,7 @@ class Adresse:
         numero_rue: str,
         nom_rue: str,
         nom_ville: str,
-        province,
+        province: ProvinceOuTerritoire,
         code_postal: str,
     ):
         self.numero_porte = numero_porte

@@ -1,5 +1,5 @@
-from mgl7460_tp1.implementations.traitements.definitions.definition_processus import DefinitionProcessus
 from mgl7460_tp1.types.traitements.definitions.condition_transition import ConditionTransition
+from mgl7460_tp1.types.traitements.definitions.definition_processus import DefinitionProcessus
 from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
 from mgl7460_tp1.types.traitements.definitions.definition_transition import DefinitionTransition
 from mgl7460_tp1.types.traitements.utils.fabrique import Fabrique
@@ -51,15 +51,16 @@ class DefinitionProcessusImpl(DefinitionProcessus):
         tache_destination: DefinitionTache,
         condition_transition: ConditionTransition,
     ) -> None:
-        transition = Fabrique.creer_definition_transition(tache_source, tache_destination, condition_transition)
+        fabrique = Fabrique.get_singleton_fabrique()
+        transition = fabrique.creer_definition_transition(tache_source, tache_destination, condition_transition)
         self.ajouter_transition(transition)
 
     def get_transitions_sortantes_de(self, tache: DefinitionTache) -> list[DefinitionTransition]:
         return [t for t in self.transitions if t.get_tache_source() == tache]
 
     def ajouter_premiere_tache(self, tache: DefinitionTache) -> None:
-        self.ajouter_tache(self.premiere_tache)
-        self.premiere_tache = tache
+        self.ajouter_tache(tache)
+        self.set_premiere_tache(tache)
 
     def is_tache_finale(self, tache: DefinitionTache) -> bool:
-        return self.taches == [] and self.premiere_tache == tache
+        return self.get_transitions_sortantes_de(tache) == []

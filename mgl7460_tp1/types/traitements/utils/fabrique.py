@@ -15,10 +15,14 @@ from mgl7460_tp1.types.traitements.instances.instance_tache import InstanceTache
 
 class Fabrique:
 
-    def creer_propriete(self, adresse: Adresse, valeur_marche: float | None = None) -> Propriete: ...
+    _instance = None
 
+    @classmethod
+    def creer_propriete(cls, adresse: Adresse, valeur_de_marche: float | None = None) -> Propriete: ...
+
+    @classmethod
     def creer_demandeur_pret(
-        self,
+        cls,
         prenom: str,
         nom: str,
         NAS: str,
@@ -27,36 +31,47 @@ class Fabrique:
         score_credit: float | None = None,
     ) -> DemandeurPret: ...
 
+    @classmethod
     def creer_demande_pret(
-        self,
+        cls,
         propriete: Propriete,
         demandeur_pret: DemandeurPret,
         prix_achat: float | None = None,
         mise_de_fonds: float | None = None,
     ) -> DemandePret: ...
 
-    def creer_resultat_traitement(self, resultat: Resultat) -> ResultatTraitement: ...
+    @classmethod
+    def creer_resultat_traitement(cls, resultat: Resultat) -> ResultatTraitement: ...
 
+    @classmethod
     def creer_definition_tache(
-        self, nom: str, description: str, traitement_tache: TraitementTache | None
+        cls, nom: str, description: str, traitement_tache: TraitementTache | None = None
     ) -> DefinitionTache: ...
 
+    @classmethod
     def creer_definition_transition(
-        self,
+        cls,
         tache_source: DefinitionTache,
         tache_destination: DefinitionTache,
         condition_transition: ConditionTransition | None = None,
     ) -> DefinitionTransition: ...
 
-    def creer_definition_processus(self, nom_processus: str, description_processus: str) -> DefinitionProcessus: ...
+    @classmethod
+    def creer_definition_processus(cls, nom_processus: str, description_processus: str) -> DefinitionProcessus: ...
 
+    @classmethod
     def creer_instance_processus(
-        self, definition_processus: DefinitionProcessus, demande_pret: DemandePret
+        cls, definition_processus: DefinitionProcessus, demande_pret: DemandePret
     ) -> InstanceProcessus: ...
 
+    @classmethod
     def creer_instance_tache(
-        self, definition_tache: DefinitionTache, instance_processus: InstanceProcessus
+        cls, definition_tache: DefinitionTache, instance_processus: InstanceProcessus
     ) -> InstanceTache: ...
 
     @staticmethod
-    def get_singleton_fabrique() -> "Fabrique": ...
+    def get_singleton_fabrique() -> "Fabrique":
+        from mgl7460_tp1.implementations.utils.fabrique import FabriqueImpl
+        if Fabrique._instance is None:
+            Fabrique._instance = FabriqueImpl()
+        return Fabrique._instance
