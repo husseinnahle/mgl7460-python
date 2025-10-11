@@ -1,7 +1,9 @@
+from typing import Protocol
+
 from mgl7460_tp1.types.traitements.definitions.traitement_tache import TraitementTache
 
 
-class DefinitionTache:
+class DefinitionTache(Protocol):
 
     def get_nom(self) -> str: ...
 
@@ -9,6 +11,6 @@ class DefinitionTache:
 
     def set_description(self, description: str) -> None: ...
 
-    def get_traitement_tache(self) -> TraitementTache: ...
+    def get_traitement_tache(self) -> TraitementTache | None: ...
 
     def set_traitement_tache(self, traitement: TraitementTache) -> None: ...

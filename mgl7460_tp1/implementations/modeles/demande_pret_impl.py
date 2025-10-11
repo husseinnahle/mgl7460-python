@@ -27,9 +27,13 @@ class DemandePretImpl(DemandePret):
         self.mise_de_fonds = mise_de_fonds
         self.prix_achat = prix_achat
         self.termes_pret = termes_pret
-        self.resultat_traitement = Fabrique.get_singleton_fabrique().creer_resultat_traitement(Resultat.ACCEPTEE)
+        self.resultat_traitement = (
+            Fabrique.get_singleton_fabrique().creer_resultat_traitement(
+                Resultat.ACCEPTEE
+            )
+        )
 
-    def get_numero_demande(self) -> str:
+    def get_numero_demande(self) -> str | None:
         return self.numero_demande
 
     def get_date_demande(self) -> datetime:

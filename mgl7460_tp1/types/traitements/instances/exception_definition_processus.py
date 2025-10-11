@@ -4,7 +4,12 @@ from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceP
 
 class ExceptionDefinitionProcessus(Exception):
 
-    def __init__(self, instance_processus: InstanceProcessus, candidates: list[DefinitionTache], message: str) -> None:
+    def __init__(
+        self,
+        instance_processus: InstanceProcessus,
+        candidates: list[DefinitionTache],
+        message: str,
+    ) -> None:
         super().__init__(message)
         self.instance_processus = instance_processus
         self.prochaines_taches_candidates = candidates

@@ -1,7 +1,9 @@
+from typing import Protocol
+
 from mgl7460_tp1.types.modeles.resultat import Resultat
 
 
-class ResultatTraitement:
+class ResultatTraitement(Protocol):
 
     def get_resultat(self) -> Resultat: ...
 

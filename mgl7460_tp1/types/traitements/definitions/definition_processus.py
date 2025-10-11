@@ -1,9 +1,11 @@
+from typing import Protocol
+
 from mgl7460_tp1.types.traitements.definitions.condition_transition import ConditionTransition
 from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
 from mgl7460_tp1.types.traitements.definitions.definition_transition import DefinitionTransition
 
 
-class DefinitionProcessus:
+class DefinitionProcessus(Protocol):
 
     def get_nom(self) -> str: ...
 
@@ -15,7 +17,9 @@ class DefinitionProcessus:
 
     def ajouter_tache(self, definition_tache: DefinitionTache) -> None: ...
 
-    def ajouter_transition(self, definition_transition: DefinitionTransition) -> None: ...
+    def ajouter_transition(
+        self, definition_transition: DefinitionTransition
+    ) -> None: ...
 
     def ajouter_transition_entre_taches(
         self,
@@ -24,9 +28,11 @@ class DefinitionProcessus:
         condition_transition: ConditionTransition,
     ) -> None: ...
 
-    def get_transitions_sortantes_de(self, tache: DefinitionTache) -> list[DefinitionTransition]: ...
+    def get_transitions_sortantes_de(
+        self, tache: DefinitionTache
+    ) -> list[DefinitionTransition]: ...
 
-    def get_premiere_tache(self) -> DefinitionTache: ...
+    def get_premiere_tache(self) -> DefinitionTache | None: ...
 
     def set_premiere_tache(self, tache: DefinitionTache) -> None: ...
 

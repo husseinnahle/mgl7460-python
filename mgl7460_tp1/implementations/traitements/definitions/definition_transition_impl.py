@@ -9,7 +9,7 @@ class DefinitionTransitionImpl(DefinitionTransition):
         self,
         tache_source: DefinitionTache,
         tache_destination: DefinitionTache,
-        condition_transition: ConditionTransition,
+        condition_transition: ConditionTransition | None = None,
     ):
         self._tache_source = tache_source
         self._tache_destination = tache_destination
@@ -21,5 +21,5 @@ class DefinitionTransitionImpl(DefinitionTransition):
     def get_tache_destination(self) -> DefinitionTache:
         return self._tache_destination
 
-    def get_condition_transition(self) -> ConditionTransition:
+    def get_condition_transition(self) -> ConditionTransition | None:
         return self._condition_transition

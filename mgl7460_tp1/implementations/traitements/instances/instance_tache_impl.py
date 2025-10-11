@@ -31,7 +31,7 @@ class InstanceTacheImpl(InstanceTache):
     def get_processus_englobant(self) -> InstanceProcessus:
         return self.processus_englobant
 
-    def get_demande_pret(self) -> DemandePret:
+    def get_demande_pret(self) -> DemandePret | None:
         return self.demande_pret
 
     def set_demande_pret(self, demande_pret: DemandePret) -> None:
@@ -40,12 +40,20 @@ class InstanceTacheImpl(InstanceTache):
     def executer(self) -> None:
         logger = self.processus_englobant.get_logger()
         tache = self.definition_tache.get_traitement_tache()
+        if tache is None:
+            raise ValueError(
+                f"Aucun traitement défini pour la tâche '{self.definition_tache.get_nom()}'."
+            )
         self.etat_instance_tache = EtatTraitement.EN_COURS
         resultat = tache.traiter_demande_pret(self.demande_pret, logger)
         if not resultat:
             fabrique = Fabrique.get_singleton_fabrique()
             resultat_traitement = fabrique.creer_resultat_traitement(Resultat.REFUSEE)
-            resultat_traitement.ajouter_message(f"La tâche '{self.definition_tache.get_nom()}' a échoué.")
+            resultat_traitement.ajouter_message(
+                f"La tâche '{self.definition_tache.get_nom()}' a échoué."
+            )
+            if self.demande_pret is None:
+                raise ValueError("Aucune demande de prêt associée à cette tâche.")
             self.demande_pret.set_resultat_traitement(resultat_traitement)
         self.etat_instance_tache = EtatTraitement.TERMINE
         self.processus_englobant.signaler_fin_tache(self)

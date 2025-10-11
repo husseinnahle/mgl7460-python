@@ -1,4 +1,7 @@
-class DemandeurPret:
+from typing import Protocol
+
+
+class DemandeurPret(Protocol):
 
     def get_nom(self) -> str: ...
 
@@ -10,7 +13,7 @@ class DemandeurPret:
 
     def set_revenu_annuel(self, revenu: float) -> None: ...
 
-    def get_obligations_anulles(self) -> float: ...
+    def get_obligations_annuelles(self) -> float: ...
 
     def set_obligations_annuelles(self, obligations: float) -> None: ...
 

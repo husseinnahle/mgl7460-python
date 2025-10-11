@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Protocol
 
 from mgl7460_tp1.types.modeles.demandeur_pret import DemandeurPret
 from mgl7460_tp1.types.modeles.propriete import Propriete
@@ -6,9 +7,9 @@ from mgl7460_tp1.types.modeles.resultat_traitement import ResultatTraitement
 from mgl7460_tp1.types.modeles.termes_pret import TermesPret
 
 
-class DemandePret:
+class DemandePret(Protocol):
 
-    def get_numero_demande(self) -> str: ...
+    def get_numero_demande(self) -> str | None: ...
 
     def get_date_demande(self) -> datetime: ...
 
@@ -34,6 +35,6 @@ class DemandePret:
 
     def set_prix_achat(self, prix: float) -> None: ...
 
-    def get_termes_pret(self) -> TermesPret: ...
+    def get_termes_pret(self) -> TermesPret | None: ...
 
     def set_termes_pret(self, termes: TermesPret) -> None: ...

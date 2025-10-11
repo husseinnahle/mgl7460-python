@@ -1,7 +1,9 @@
+from typing import Protocol
+
 from mgl7460_tp1.types.modeles.adresse import Adresse
 
 
-class Propriete:
+class Propriete(Protocol):
 
     def get_adresse(self) -> Adresse: ...
 

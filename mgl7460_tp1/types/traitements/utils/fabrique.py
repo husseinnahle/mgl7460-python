@@ -1,3 +1,5 @@
+from typing import Protocol
+
 from mgl7460_tp1.types.modeles.adresse import Adresse
 from mgl7460_tp1.types.modeles.demande_pret import DemandePret
 from mgl7460_tp1.types.modeles.demandeur_pret import DemandeurPret
@@ -13,12 +15,12 @@ from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceP
 from mgl7460_tp1.types.traitements.instances.instance_tache import InstanceTache
 
 
-class Fabrique:
-
-    _instance = None
+class Fabrique(Protocol):
 
     @classmethod
-    def creer_propriete(cls, adresse: Adresse, valeur_de_marche: float | None = None) -> Propriete: ...
+    def creer_propriete(
+        cls, adresse: Adresse, valeur_de_marche: float
+    ) -> Propriete: ...
 
     @classmethod
     def creer_demandeur_pret(
@@ -26,9 +28,9 @@ class Fabrique:
         prenom: str,
         nom: str,
         NAS: str,
-        revenu_annel: float | None = None,
-        obligations_anuelles: float | None = None,
-        score_credit: float | None = None,
+        revenu_annuel: float,
+        obligations_annuelles: float,
+        score_credit: int,
     ) -> DemandeurPret: ...
 
     @classmethod
@@ -36,8 +38,8 @@ class Fabrique:
         cls,
         propriete: Propriete,
         demandeur_pret: DemandeurPret,
-        prix_achat: float | None = None,
-        mise_de_fonds: float | None = None,
+        prix_achat: float,
+        mise_de_fonds: float,
     ) -> DemandePret: ...
 
     @classmethod
@@ -57,7 +59,9 @@ class Fabrique:
     ) -> DefinitionTransition: ...
 
     @classmethod
-    def creer_definition_processus(cls, nom_processus: str, description_processus: str) -> DefinitionProcessus: ...
+    def creer_definition_processus(
+        cls, nom_processus: str, description_processus: str
+    ) -> DefinitionProcessus: ...
 
     @classmethod
     def creer_instance_processus(
@@ -71,7 +75,6 @@ class Fabrique:
 
     @staticmethod
     def get_singleton_fabrique() -> "Fabrique":
-        from mgl7460_tp1.implementations.utils.fabrique import FabriqueImpl
-        if Fabrique._instance is None:
-            Fabrique._instance = FabriqueImpl()
-        return Fabrique._instance
+        from mgl7460_tp1.implementations.utils.fabrique_impl import FabriqueImpl
+
+        return FabriqueImpl()

@@ -23,7 +23,7 @@ class DefinitionProcessusImpl(DefinitionProcessus):
     def set_description(self, description: str) -> None:
         self.description = description
 
-    def get_premiere_tache(self) -> DefinitionTache:
+    def get_premiere_tache(self) -> DefinitionTache | None:
         return self.premiere_tache
 
     def set_premiere_tache(self, tache: DefinitionTache) -> None:
@@ -48,10 +48,14 @@ class DefinitionProcessusImpl(DefinitionProcessus):
         condition_transition: ConditionTransition,
     ) -> None:
         fabrique = Fabrique.get_singleton_fabrique()
-        transition = fabrique.creer_definition_transition(tache_source, tache_destination, condition_transition)
+        transition = fabrique.creer_definition_transition(
+            tache_source, tache_destination, condition_transition
+        )
         self.ajouter_transition(transition)
 
-    def get_transitions_sortantes_de(self, tache: DefinitionTache) -> list[DefinitionTransition]:
+    def get_transitions_sortantes_de(
+        self, tache: DefinitionTache
+    ) -> list[DefinitionTransition]:
         return [t for t in self.transitions if t.get_tache_source() == tache]
 
     def ajouter_premiere_tache(self, tache: DefinitionTache) -> None:

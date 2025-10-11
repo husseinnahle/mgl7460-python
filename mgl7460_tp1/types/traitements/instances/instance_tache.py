@@ -1,10 +1,11 @@
+from typing import Protocol
+
 from mgl7460_tp1.types.modeles.demande_pret import DemandePret
 from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
 from mgl7460_tp1.types.traitements.instances.etat_traitement import EtatTraitement
-# from mgl7460_tp1.types.traitements.instances.instance_processus import InstanceProcessus # circular import
 
 
-class InstanceTache:
+class InstanceTache(Protocol):
 
     def get_definition_tache(self) -> DefinitionTache: ...
 
@@ -14,7 +15,7 @@ class InstanceTache:
 
     def get_processus_englobant(self): ...
 
-    def get_demande_pret(self) -> DemandePret: ...
+    def get_demande_pret(self) -> DemandePret | None: ...
 
     def set_demande_pret(self, demande_pret: DemandePret) -> None: ...
 
