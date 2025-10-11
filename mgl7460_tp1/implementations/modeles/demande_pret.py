@@ -1,10 +1,12 @@
 from datetime import datetime
+
 from mgl7460_tp1.types.modeles.demande_pret import DemandePret
 from mgl7460_tp1.types.modeles.demandeur_pret import DemandeurPret
 from mgl7460_tp1.types.modeles.propriete import Propriete
 from mgl7460_tp1.types.modeles.resultat import Resultat
 from mgl7460_tp1.types.modeles.resultat_traitement import ResultatTraitement
 from mgl7460_tp1.types.modeles.termes_pret import TermesPret
+from mgl7460_tp1.types.traitements.utils.fabrique import Fabrique
 
 
 class DemandePretImpl(DemandePret):
@@ -17,7 +19,6 @@ class DemandePretImpl(DemandePret):
         mise_de_fonds: float,
         numero_demande: str | None = None,
         termes_pret: TermesPret | None = None,
-        resultat_traitement: ResultatTraitement | None = None,
     ) -> None:
         self.numero_demande = numero_demande
         self.date_demande = datetime.now()
@@ -26,7 +27,7 @@ class DemandePretImpl(DemandePret):
         self.mise_de_fonds = mise_de_fonds
         self.prix_achat = prix_achat
         self.termes_pret = termes_pret
-        self.resultat_traitement = resultat_traitement
+        self.resultat_traitement = Fabrique.get_singleton_fabrique().creer_resultat_traitement(Resultat.ACCEPTEE)
 
     def get_numero_demande(self) -> str:
         return self.numero_demande
@@ -53,14 +54,8 @@ class DemandePretImpl(DemandePret):
         return self.resultat_traitement
 
     def set_resultat_traitement(self, resultat_traitement: ResultatTraitement) -> None:
-        if self.resultat_traitement is None:
-            self.resultat_traitement = resultat_traitement
-            return
-        resultat_actuel = self.resultat_traitement.get_resultat()
-        nouveau_resultat = resultat_traitement.get_resultat()
-        if resultat_actuel == Resultat.ACCEPTEE and nouveau_resultat == Resultat.REFUSEE:
-            self.resultat_traitement = resultat_traitement
-        elif resultat_actuel == Resultat.REFUSEE and nouveau_resultat == Resultat.REFUSEE:
+        if resultat_traitement.get_resultat() == Resultat.REFUSEE:
+            self.resultat_traitement.set_resultat(Resultat.REFUSEE)
             for message in resultat_traitement.get_messages():
                 self.resultat_traitement.ajouter_message(message)
 

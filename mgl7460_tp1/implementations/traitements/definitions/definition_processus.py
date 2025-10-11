@@ -7,11 +7,7 @@ from mgl7460_tp1.types.traitements.utils.fabrique import Fabrique
 
 class DefinitionProcessusImpl(DefinitionProcessus):
 
-    def __init__(
-        self,
-        nom: str,
-        description: str
-    ) -> None:
+    def __init__(self, nom: str, description: str) -> None:
         self.nom = nom
         self.description = description
         self.premiere_tache: DefinitionTache | None = None

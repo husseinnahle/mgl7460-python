@@ -3,7 +3,9 @@ from mgl7460_tp1.types.modeles.demandeur_pret import DemandeurPret
 
 class DemandeurPretImpl(DemandeurPret):
 
-    def __init__(self, nom: str, prenom: str, nas: str, revenu_annuel: float, obligations_annuelles: float, score_credit: int) -> None:
+    def __init__(
+        self, nom: str, prenom: str, nas: str, revenu_annuel: float, obligations_annuelles: float, score_credit: int
+    ) -> None:
         self.nom = nom
         self.prenom = prenom
         self.nas = nas
