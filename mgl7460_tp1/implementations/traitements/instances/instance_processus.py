@@ -1,7 +1,8 @@
 from datetime import datetime
-from logging import Logger
+from logging import Logger, getLogger
 
 from mgl7460_tp1.types.modeles.demande_pret import DemandePret
+from mgl7460_tp1.types.modeles.resultat import Resultat
 from mgl7460_tp1.types.traitements.definitions.definition_processus import DefinitionProcessus
 from mgl7460_tp1.types.traitements.definitions.definition_tache import DefinitionTache
 from mgl7460_tp1.types.traitements.instances.etat_processus import EtatProcessus
@@ -22,7 +23,7 @@ class InstanceProcessusImpl(InstanceProcessus):
         self.temps_demarrage: datetime | None = None
         self.temps_arret: datetime | None = None
         self.etat_processus: EtatProcessus | None = None
-        self.logger: Logger | None = None
+        self.logger: Logger = getLogger(definition_processus.get_nom())
         self.fabrique = Fabrique.get_singleton_fabrique()
 
     def get_demande_pret(self) -> DemandePret:
@@ -64,28 +65,31 @@ class InstanceProcessusImpl(InstanceProcessus):
         self.temps_arret = datetime.now()
 
     def signaler_fin_tache(self, instance_tache: InstanceTache) -> None:
-        # Enregistrer la tâche terminée
+
+        self.tache_courante = None
+
         self.taches.append(instance_tache)
-        # Chercher la prochaine tâche à exécuter
+
         definition_tache = instance_tache.get_definition_tache()
+
         transitions = self.definition_processus.get_transitions_sortantes_de(definition_tache)
-        # Aucun transition sortante : fin du processus
-        if len(transitions) == 0:
+
+        definition_tache_suivante = []
+        for transition in transitions:
+            condition = transition.get_condition_transition()
+            if condition.is_transition_ok(definition_tache, self.demande_pret):
+                definition_tache_suivante.append(transition.get_tache_destination())
+
+        if len(definition_tache_suivante) == 0:
             return
-        # Plusieurs transitions sortantes : erreur de définition du processus
-        elif len(transitions) > 1:
+
+        elif len(definition_tache_suivante) > 1:
             message = "Plusieurs transitions sortantes trouvées. Votre processus est mal formé."
             raise ExceptionDefinitionProcessus(self, [e.get_tache_destination() for e in transitions], message)
-        # Une seule transition sortante : continuer le processus
-        transition = transitions[0]
-        condition = transition.get_condition_transition()
-        # Vérifier si la condition de transition est satisfaite
-        if not condition.is_transition_ok(definition_tache, self.demande_pret):
-            return
-        # Créer et configurer la tâche suivante
-        definition_tache_suivante = transition.get_tache_destination()
-        tache_suivante: InstanceTache = self.fabrique.creer_instance_tache(definition_tache_suivante, self)
+
+        tache_suivante = self._creer_instance_tache(definition_tache_suivante[0])
         self.etat_processus = EtatProcessus(tache_suivante, EtatTraitement.PRET)
+        self.tache_courante = tache_suivante
 
     def _creer_instance_tache(self, definition_tache: DefinitionTache) -> InstanceTache:
         instance_tache: InstanceTache = self.fabrique.creer_instance_tache(definition_tache, self)

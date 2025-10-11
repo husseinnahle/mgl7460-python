@@ -34,7 +34,7 @@ class CreationDefinitionsTaches:
         )
         tache_eligibilite_propriete.set_traitement_tache(
             TraitementTache(
-                lambda demande, logger: demande.get_propriete().get_adresse().province() == ProvinceOuTerritoire.QUEBEC
+                lambda demande, logger: demande.get_propriete().get_adresse().province == ProvinceOuTerritoire.QUEBEC
             )
         )
         return tache_eligibilite_propriete

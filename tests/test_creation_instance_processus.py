@@ -159,7 +159,7 @@ class TestCreationInstanceProcessus(TestCase):
         )
 
     def test_execution_processus_complexe_sur_demande_non_non_non(self):
-        demande_pret = CreationDemandesPret.get_demande_pret_oui_non_non()
+        demande_pret = CreationDemandesPret.get_demande_pret_non_non_non()
         instance_processus = self.fabrique.creer_instance_processus(self.processus_complexe, demande_pret)
         instance_processus.demarrer()
         self.assertEqual(

@@ -45,6 +45,8 @@ class InstanceTacheImpl(InstanceTache):
         resultat = Resultat.ACCEPTEE if resultat else Resultat.REFUSEE
         fabrique = Fabrique.get_singleton_fabrique()
         resultat_traitement = fabrique.creer_resultat_traitement(resultat)
+        if resultat == Resultat.REFUSEE:
+            resultat_traitement.ajouter_message(f"La tâche '{self.definition_tache.get_nom()}' a échoué.")
         self.demande_pret.set_resultat_traitement(resultat_traitement)
         self.etat_instance_tache = EtatTraitement.TERMINE
         self.processus_englobant.signaler_fin_tache(self)

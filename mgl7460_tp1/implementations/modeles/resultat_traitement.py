@@ -4,9 +4,9 @@ from mgl7460_tp1.types.modeles.resultat_traitement import ResultatTraitement
 
 class ResultatTraitementImpl(ResultatTraitement):
 
-    def __init__(self, resultat: Resultat, messages: list[str] = []) -> None:
+    def __init__(self, resultat: Resultat, messages: list[str] | None = None) -> None:
         self.resultat = resultat
-        self.messages = messages
+        self.messages = messages if messages is not None else []
 
     def get_resultat(self) -> Resultat:
         return self.resultat
